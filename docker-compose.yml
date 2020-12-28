@@ -1,0 +1,22 @@
+version: '3.7'
+
+volumes:
+  pgdata:
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: horoscope
+      POSTGRES_PASSWORD: pIOhofr53
+      POSTGRES_DB: horoscope
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+    ports:
+    - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U horoscope"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
